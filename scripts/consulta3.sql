@@ -1,6 +1,7 @@
 use adw;
 
--- Empleados
+with datos as (
+
 select 
     SalesOrderID,
     OrderDate,
@@ -24,5 +25,13 @@ from Sales_SalesOrderHeader as sales
         on sales.TerritoryID=territory.TerritoryID
     join HumanResources_Employee as employee 
         on emp.BusinessEntityID=employee.BusinessEntityID
-limit 5
+)
+select 
+    SalesName,
+    count(*) as Ventas
+from datos
+group by SalesName
+order by Ventas desc
+
+limit 10
 ;
